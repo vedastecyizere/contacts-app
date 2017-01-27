@@ -1,0 +1,15 @@
+<h1> All Contacts</h1>
+  <div class="row">
+    <% @contacts.each_slice(3) do |three_contacts| %>
+      <div class="row">
+          <% three_contacts.each do |contact| %>
+            <div class="col-md-4">
+              <h2><%= link_to contact.first_name, "/contacts/#{contact.id}" %></h2>
+              <h2>Last Name: <%= contact.last_name %></h2>
+              <h2>Email: <%= contact.email %></h2>
+              <h2>Phone Number: <%= contact.phone_number %></h2>
+            </div>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
