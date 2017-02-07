@@ -4,6 +4,7 @@ Rails.application.routes.draw do
  get "/info2", to: 'personal_info#info2'
  get "/contacts", to: 'personal_info#index'
  get "/contacts/new", to: 'personal_info#new'
+ post "/contacts/search", to: 'personal_info#search'
  get "/contacts/:id", to: 'personal_info#show'
  post "/contacts", to: 'personal_info#create'
  get "/contacts/:id/edit", to: 'personal_info#edit'

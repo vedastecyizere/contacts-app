@@ -16,8 +16,11 @@ class PersonalInfoController < ApplicationController
   end 
 
   def index
-    @contacts = Contact.all
-    render "index.html.erb"
+    if params[:group]
+       @contacts =  Group.find_by(name: params[:group]).contacts
+    else
+      @contacts = Contact.all
+    end  
   end 
 
   def new 
@@ -61,5 +64,15 @@ class PersonalInfoController < ApplicationController
     redirect_to "/contacts/"
     flash[:info] = "Your contact has been deleted"
 
+  end
+
+  def search 
+    search_query = params[:search_input]
+    @contacts = Contact.where("first_name LIKE ? OR last_name LIKE ?", "%{search_query}%","%#{search_query}%")
+    if @contacts.empty?
+      flash[:info] = "No Result Found!"
+    end 
+    render :index
+    
   end
 end 
